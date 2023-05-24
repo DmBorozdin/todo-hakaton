@@ -17,6 +17,12 @@ function App() {
       title: inputValue,
       id: data.length + 1,
     }])
+    setInputValue('');
+  }
+
+  const handleDeleteClick = (evt, id) => {
+    const newItemList = data.filter (item => item.id !== id);
+    setData(newItemList);
   }
 
   return (
@@ -27,12 +33,12 @@ function App() {
           {data.map(elem => (
             <li className='todo-element' key={elem.id}>
               <div>- {elem.title}</div> 
-              <div className='del-elem'>Удалить</div>
+              <div className='del-elem' onClick={evt => handleDeleteClick(evt, elem.id)}>Удалить</div>
             </li>
           ))}
         </ul>
         <div className='add-wrap'>
-          <input className='input' onChange={evt => setInputValue(evt.target.value)} value={inputValue}></input>
+          <input className='input' onChange={evt => setInputValue(evt.target.value)} value={inputValue} placeholder="Введите задачу"></input>
           <button type='submit' onClick={handleAddClick}>Добавить</button>
         </div>
       </header>
