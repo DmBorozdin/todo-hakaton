@@ -9,6 +9,9 @@
 
 .del-elem {
     cursor: pointer;
+    padding: 5px 10px;
+    background-color: blue;
+    color: white;
 }
 
 .todo {
@@ -21,6 +24,8 @@
 .todo-element {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
 }
 
 .title {

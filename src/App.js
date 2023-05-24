@@ -1,10 +1,20 @@
 import './App.scss';
+import { useState } from 'react';
 
 function App() {
-  const data = [
+  const dataMock = [
     {title: 'купить молоко', id: 1},
     {title: 'сходить в спорт зал', id: 2}
   ]
+  const [data, setData] = useState(dataMock);
+  const [inputValue, setInputValue] = useState('')
+
+  const handleAddClick = () => {
+    setData({
+      title: ""
+    })
+  }
+
   return (
     <div className="todo">
       <header className="todo-header">
@@ -19,7 +29,7 @@ function App() {
         </ul>
         <div className='add-wrap'>
           <input className='input'></input>
-          <button type='submit'>Добавить</button>
+          <button type='submit' onClick={handleAddClick}>Добавить</button>
         </div>
       </header>
     </div>
