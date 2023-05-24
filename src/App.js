@@ -1,5 +1,6 @@
 import './App.scss';
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 
 function App() {
   const dataMock = [
@@ -11,18 +12,41 @@ function App() {
 
   const handleAddClick = (evt) => {
     evt.preventDefault();
-    console.log(inputValue);
-    setData([...data,
-      {
-      title: inputValue,
-      id: data.length + 1,
-    }])
+
+    if (!inputValue) {
+      toast.error('Please fill all the required input fields');
+      return;
+    }
+    fetch('/api/notes', {
+      method: 'POST',
+      body: JSON.stringify({
+        title: inputValue,
+        body: inputValue,
+      }),
+    })
+      .then((res) => {
+        console.log(res.json());
+        setData([...data,
+          {
+          title: inputValue,
+          id: data.length + 1,
+        }])
+        toast.success('Note added successfully');
+      })
+      .catch((error) => {
+        console.log('Error adding note.', error);
+        toast.error('Error adding note.');
+      });
+
     setInputValue('');
   }
 
   const handleDeleteClick = (evt, id) => {
     const newItemList = data.filter (item => item.id !== id);
     setData(newItemList);
+    fetch(`/api/notes/${id}`, {
+      method: 'DELETE',
+    })
   }
 
   return (
