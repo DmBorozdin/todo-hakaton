@@ -9,10 +9,14 @@ function App() {
   const [data, setData] = useState(dataMock);
   const [inputValue, setInputValue] = useState('')
 
-  const handleAddClick = () => {
-    setData({
-      title: ""
-    })
+  const handleAddClick = (evt) => {
+    evt.preventDefault();
+    console.log(inputValue);
+    setData([...data,
+      {
+      title: inputValue,
+      id: data.length + 1,
+    }])
   }
 
   return (
@@ -28,7 +32,7 @@ function App() {
           ))}
         </ul>
         <div className='add-wrap'>
-          <input className='input'></input>
+          <input className='input' onChange={evt => setInputValue(evt.target.value)} value={inputValue}></input>
           <button type='submit' onClick={handleAddClick}>Добавить</button>
         </div>
       </header>
