@@ -1,22 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import './App.scss';
 
 function App() {
+  const data = [
+    {title: 'купить молоко', id: 1},
+    {title: 'сходить в спорт зал', id: 2}
+  ]
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <div className="todo">
+      <header className="todo-header">
+        <h1 className='title'>Todo</h1>
+        <ul>
+          {data.map(elem => (
+            <li className='todo-element' key={elem.id}>
+              <div>- {elem.title}</div> 
+              <div className='del-elem'>Удалить</div>
+            </li>
+          ))}
+        </ul>
+        <div className='add-wrap'>
+          <input className='input'></input>
+          <button type='submit'>Добавить</button>
+        </div>
       </header>
     </div>
   );
