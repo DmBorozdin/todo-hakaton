@@ -41,9 +41,16 @@ function App() {
 
   return (
     <div className="todo">
-            <form>
+            <form className='authorization'>
+              <div>
                 <input type={"text"}/>
-                <button >Войти</button>
+                <span>Логин</span>
+              </div>
+              <div>
+                <input type={"password"}/>
+                <span>Пароль</span>
+              </div>
+                <button>Войти</button>
             </form>
       <header className="todo-header">
         <h1 className='title'>Todo</h1>
