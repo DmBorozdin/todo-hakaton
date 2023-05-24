@@ -1,12 +1,8 @@
 import './App.scss';
 import { useState } from 'react';
-import { toast } from 'react-toastify';
 
 function App() {
-  const dataMock = [
-    {title: 'купить молоко', id: 1},
-    {title: 'сходить в спорт зал', id: 2}
-  ]
+  const dataMock = []
   const [data, setData] = useState(dataMock);
   const [inputValue, setInputValue] = useState('')
 
@@ -14,7 +10,7 @@ function App() {
     evt.preventDefault();
 
     if (!inputValue) {
-      toast.error('Please fill all the required input fields');
+      console.log('Please fill all the required input fields');
       return;
     }
     fetch('/api/notes', {
@@ -23,19 +19,13 @@ function App() {
         title: inputValue,
         body: inputValue,
       }),
-    })
+    }).then((res) => res.json())
       .then((res) => {
-        console.log(res.json());
-        setData([...data,
-          {
-          title: inputValue,
-          id: data.length + 1,
-        }])
-        toast.success('Note added successfully');
+        setData([...data, res.notes])
+        console.log('Note added successfully');
       })
       .catch((error) => {
         console.log('Error adding note.', error);
-        toast.error('Error adding note.');
       });
 
     setInputValue('');
